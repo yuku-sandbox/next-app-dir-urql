@@ -9,6 +9,7 @@ const fragment = graphql(`
     id
     title
     author {
+      id: login
       login
     }
   }

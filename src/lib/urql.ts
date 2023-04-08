@@ -1,12 +1,14 @@
 import { cache } from "react";
 import {
-  cacheExchange,
   fetchExchange,
   ssrExchange,
-  createClient,
+  // cacheExchange,
   SSRExchange,
   SSRData,
+  Client,
 } from "@urql/core";
+import { cacheExchange } from "@urql/exchange-graphcache";
+import { devtoolsExchange } from "@urql/devtools";
 
 export const serverSsrExchange = cache(() => {
   return ssrExchange({ isClient: false });
@@ -17,13 +19,14 @@ export const serverUrqlClient = cache(() => {
 });
 
 export function clientUrqlClient(initialState: SSRData) {
+  console.log("create UrqlClient with initialState: ", initialState);
   return createUrqlClient(ssrExchange({ isClient: true, initialState }));
 }
 
 export function createUrqlClient(ssrCache: SSRExchange) {
-  return createClient({
+  return new Client({
     url: "https://api.github.com/graphql",
-    exchanges: [ssrCache, cacheExchange, fetchExchange],
+    exchanges: [devtoolsExchange, cacheExchange(), ssrCache, fetchExchange],
     fetchOptions: () => {
       return {
         headers: {

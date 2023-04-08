@@ -8,6 +8,12 @@ const config: CodegenConfig = {
     "./src/gql/": {
       preset: "client",
     },
+    "./src/gql/schema.json": {
+      plugins: ["introspection"],
+      config: {
+        minify: true,
+      },
+    },
   },
 };
 

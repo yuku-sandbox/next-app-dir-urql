@@ -1,4 +1,5 @@
 import { Issue } from "@/component/Issue";
+import { UrqlServerProvider } from "@/component/UrqlServerProvider";
 import { graphql } from "@/gql";
 import { serverUrqlClient } from "@/lib/urql";
 
@@ -25,5 +26,9 @@ export default async function IssuePage({
     return <div>Invalid ID</div>;
   }
 
-  return <Issue issue={data.node} />;
+  return (
+    <UrqlServerProvider>
+      <Issue issue={data.node} />
+    </UrqlServerProvider>
+  );
 }

@@ -14,8 +14,6 @@ const fragment = graphql(`
 export function Issue(props: { issue: FragmentType<typeof fragment> }) {
   const issue = useFragment(fragment, props.issue);
 
-  console.log(issue);
-
   return (
     <div>
       <h1>

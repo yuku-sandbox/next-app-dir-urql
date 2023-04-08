@@ -3,6 +3,7 @@ import { FragmentType, graphql, useFragment } from "@/gql";
 const fragment = graphql(`
   fragment IssueListHeader_Repository on Repository {
     owner {
+      id
       login
     }
     name
