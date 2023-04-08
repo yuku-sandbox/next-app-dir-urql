@@ -16,8 +16,8 @@ const document = graphql(`
 export default async function IssueListPage() {
   const { data } = await serverUrqlClient()
     .query(document, {
-      owner: "yukukotani",
-      name: "next-app-dir-urql",
+      owner: process.env.NEXT_PUBLIC_GITHUB_OWNER as string,
+      name: process.env.NEXT_PUBLIC_GITHUB_REPO as string,
     })
     .toPromise();
 
