@@ -17,6 +17,7 @@ export default async function Home() {
   if (data == null) {
     throw new Error("");
   }
+
   return (
     <main className={styles.main}>
       <Header user={data.viewer} />
