@@ -1,7 +1,7 @@
 import { FragmentType, graphql, useFragment } from "@/gql";
 
 const fragment = graphql(`
-  fragment Header_Repository on Repository {
+  fragment IssueListHeader_Repository on Repository {
     owner {
       login
     }
@@ -9,7 +9,9 @@ const fragment = graphql(`
   }
 `);
 
-export function Header(props: { repository: FragmentType<typeof fragment> }) {
+export function IssueListHeader(props: {
+  repository: FragmentType<typeof fragment>;
+}) {
   const repository = useFragment(fragment, props.repository);
 
   return (

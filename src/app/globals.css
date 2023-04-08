@@ -1,1 +1,5 @@
 @import url("node_modules/modern-css-reset/dist/reset.min.css");
+
+body {
+  padding: 16px;
+}

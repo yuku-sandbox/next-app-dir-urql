@@ -1,4 +1,3 @@
-import { Header } from "@/component/Header";
 import styles from "./page.module.css";
 import { graphql } from "@/gql";
 import { serverUrqlClient } from "@/lib/urql";
@@ -7,15 +6,12 @@ import { IssueList } from "@/component/IssueList";
 const document = graphql(`
   query repository($owner: String!, $name: String!) {
     repository(owner: $owner, name: $name) {
-      ...Header_Repository
-      issues {
-        ...IssueList_IssueConnection
-      }
+      ...IssueList_Repository
     }
   }
 `);
 
-export default async function Home() {
+export default async function IssueListPage() {
   const { data } = await serverUrqlClient()
     .query(document, {
       owner: "yukukotani",
@@ -29,8 +25,7 @@ export default async function Home() {
 
   return (
     <main className={styles.main}>
-      <Header repository={data.repository} />
-      <IssueList issues={data.repository.issues} />
+      <IssueList repository={data.repository} />
     </main>
   );
 }
