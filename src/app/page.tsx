@@ -1,23 +1,25 @@
+import { Header } from "@/component/Header";
 import styles from "./page.module.css";
 import { graphql } from "@/gql";
 import { serverUrqlClient } from "@/lib/urql";
 
-const currentUserDocument = graphql(`
+const document = graphql(`
   query currentUser {
     viewer {
-      login
+      ...Header_User
     }
   }
 `);
 
 export default async function Home() {
-  const res = await serverUrqlClient()
-    .query(currentUserDocument, {})
-    .toPromise();
+  const { data } = await serverUrqlClient().query(document, {}).toPromise();
 
+  if (data == null) {
+    throw new Error("");
+  }
   return (
     <main className={styles.main}>
-      You are {res.data?.viewer?.login}, {res.error?.message}
+      <Header user={data.viewer} />
     </main>
   );
 }
