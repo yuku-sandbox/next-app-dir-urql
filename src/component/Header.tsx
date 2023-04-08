@@ -1,13 +1,20 @@
 import { FragmentType, graphql, useFragment } from "@/gql";
 
-const userDocument = graphql(`
-  fragment Header_User on User {
-    login
+const fragment = graphql(`
+  fragment Header_Repository on Repository {
+    owner {
+      login
+    }
+    name
   }
 `);
 
-export function Header(props: { user: FragmentType<typeof userDocument> }) {
-  const currentUser = useFragment(userDocument, props.user);
+export function Header(props: { repository: FragmentType<typeof fragment> }) {
+  const repository = useFragment(fragment, props.repository);
 
-  return <h1>Hello, {currentUser.login}</h1>;
+  return (
+    <h1>
+      {repository.owner.login}/{repository.name}'s issues
+    </h1>
+  );
 }
