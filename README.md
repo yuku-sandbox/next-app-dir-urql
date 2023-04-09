@@ -1,4 +1,4 @@
-# next-app-dir-urql (Not working yet)
+# next-app-dir-urql
 
 A toy GitHub issue tracker app, attempting to engage Next.js App Dir & urql.
 
