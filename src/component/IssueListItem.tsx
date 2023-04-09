@@ -2,6 +2,7 @@
 
 import { FragmentType, graphql, useFragment } from "@/gql";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMutation } from "urql";
 
 const fragment = graphql(`
@@ -26,6 +27,7 @@ const renameIssueDoc = graphql(`
 `);
 
 export function IssueListItem(props: { issue: FragmentType<typeof fragment> }) {
+  const router = useRouter();
   const issue = useFragment(fragment, props.issue);
   const [, renameIssue] = useMutation(renameIssueDoc);
 
@@ -37,6 +39,7 @@ export function IssueListItem(props: { issue: FragmentType<typeof fragment> }) {
         title: newTitle,
       });
     }
+    router.refresh();
   };
 
   return (
