@@ -2,12 +2,11 @@ import { cache } from "react";
 import {
   fetchExchange,
   ssrExchange,
-  // cacheExchange,
+  cacheExchange,
   SSRExchange,
   SSRData,
   Client,
 } from "@urql/core";
-import { cacheExchange } from "@urql/exchange-graphcache";
 import { devtoolsExchange } from "@urql/devtools";
 
 export const serverSsrExchange = cache(() => {
@@ -26,7 +25,7 @@ export function clientUrqlClient(initialState: SSRData) {
 export function createUrqlClient(ssrCache: SSRExchange) {
   return new Client({
     url: "https://api.github.com/graphql",
-    exchanges: [devtoolsExchange, cacheExchange(), ssrCache, fetchExchange],
+    exchanges: [devtoolsExchange, cacheExchange, ssrCache, fetchExchange],
     fetchOptions: () => {
       return {
         headers: {

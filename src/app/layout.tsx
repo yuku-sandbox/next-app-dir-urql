@@ -1,4 +1,3 @@
-import { UrqlServerProvider } from "@/component/UrqlServerProvider";
 import "./globals.css";
 
 export const fetchCache = "default-no-store";

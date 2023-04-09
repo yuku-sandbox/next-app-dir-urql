@@ -18,7 +18,6 @@
     "@types/react-dom": "18.0.11",
     "@urql/core": "^4.0.4",
     "@urql/devtools": "^2.0.3",
-    "@urql/exchange-graphcache": "^6.0.1",
     "modern-css-reset": "^1.4.0",
     "next": "13.3.0",
     "react": "18.2.0",
