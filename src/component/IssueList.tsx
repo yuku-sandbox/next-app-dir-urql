@@ -4,6 +4,11 @@ import { IssueListItem } from "./IssueListItem";
 
 const fragment = graphql(`
   fragment IssueList_Repository on Repository {
+    owner {
+      id
+      login
+    }
+    name
     issues(first: 10) {
       nodes {
         id
@@ -22,15 +27,26 @@ export function IssueList(props: {
   return (
     <div>
       <IssueListHeader repository={repository} />
-      <ul>
-        {repository.issues.nodes?.map((issue) =>
-          issue ? (
-            <IssueListItem issue={issue} key={issue.id} />
-          ) : (
-            <li key="invalid">Invalid item</li>
-          )
-        )}
-      </ul>
+      {repository.issues.nodes?.length === 0 ? (
+        <p>
+          No issue found. Please create{" "}
+          <a
+            href={`https://github.com/${repository.owner.login}/${repository.name}`}
+          >
+            here
+          </a>
+        </p>
+      ) : (
+        <ul>
+          {repository.issues.nodes?.map((issue) =>
+            issue ? (
+              <IssueListItem issue={issue} key={issue.id} />
+            ) : (
+              <li key="invalid">Invalid item</li>
+            )
+          )}
+        </ul>
+      )}
     </div>
   );
 }
