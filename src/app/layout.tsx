@@ -1,6 +1,7 @@
 import { UrqlServerProvider } from "@/component/UrqlServerProvider";
 import "./globals.css";
-import "@/lib/fetch";
+
+export const fetchCache = "default-no-store";
 
 export const metadata = {
   title: "Create Next App",
